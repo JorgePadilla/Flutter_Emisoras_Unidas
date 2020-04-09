@@ -6,6 +6,7 @@ import 'package:wave/wave.dart';
 import 'package:wave/config.dart';
 import 'theme_colors.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:share/share.dart';
 
 class AudioPlayerScreen extends StatefulWidget {
   @override
@@ -19,7 +20,7 @@ class _AudioPlayerScreenState extends State<AudioPlayerScreen> {
   String greetings;
   bool isPlayingAudio = false;
   int difference;
-  String url = "http://magic.globalradios.stream";
+  String url = "http://latuani.globalradios.stream";
   Timer playStateTimer;
   Timer seekBarTimer;
   double progress = 0.0;
@@ -86,6 +87,20 @@ class _AudioPlayerScreenState extends State<AudioPlayerScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        appBar: AppBar(
+          actions: <Widget>[IconButton(
+            icon: const Icon(Icons.share),
+
+            tooltip: "Share",
+            onPressed: (){
+              share(
+                  context
+              );
+            },
+          )],
+
+          backgroundColor: Colors.deepOrangeAccent,
+        ),
         body: SingleChildScrollView(
       child: Column(
         children: <Widget>[
@@ -149,7 +164,7 @@ class _AudioPlayerScreenState extends State<AudioPlayerScreen> {
             margin: EdgeInsets.only(top: 20.0),
             alignment: Alignment.center,
             child: Text(
-              "Magic Radio",
+              "La Tuani 100.3 FM",
               style: TextStyle(
                   fontFamily: "Regular",
                   color: Colors.blueGrey,
@@ -193,75 +208,84 @@ class _AudioPlayerScreenState extends State<AudioPlayerScreen> {
           SizedBox(
             height: 5.0,
           ),
-          GestureDetector(
-            onTap: () {
-              speedIndex++;
-              if (speedIndex == 4) {
-                speedIndex = 0;
-              }
-              switch (speedIndex) {
-                case 0:
-                  {
-                    setState(() {
-                      currentSpeed = "1x";
-                      setSpeedXPlayer("1X").then((value) {});
-                    });
-                  }
-                  break;
-                case 1:
-                  {
-                    setState(() {
-                      currentSpeed = "0.5x";
-                      setSpeedXPlayer("0.5x").then((value) {});
-                    });
-                  }
-                  break;
-                case 2:
-                  {
-                    setState(() {
-                      currentSpeed = "0.75x";
-                      setSpeedXPlayer("0.75x").then((value) {});
-                    });
-                  }
-                  break;
-                case 3:
-                  {
-                    setState(() {
-                      currentSpeed = "2x";
-                      setSpeedXPlayer("2x").then((value) {});
-                    });
-                  }
-                  break;
-              }
-
-              if (speedIndex == 0) {
-                currentSpeed = "1x";
-                setSpeedXPlayer("1x").then((value) {});
-              }
-            },
-            child: Container(
-              width: 50.0,
-              height: 50.0,
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: Colors.blue.withOpacity(0.5),
-              ),
-              child: Text(
-                currentSpeed,
-                style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 15.0,
-                    fontFamily: "BoldFont"),
-              ),
-              padding: EdgeInsets.fromLTRB(5.0, 5.0, 5.0, 5.0),
-            ),
-          )
+//          GestureDetector(
+//            onTap: () {
+//              speedIndex++;
+//              if (speedIndex == 4) {
+//                speedIndex = 0;
+//              }
+//              switch (speedIndex) {
+//                case 0:
+//                  {
+//                    setState(() {
+//                      currentSpeed = "1x";
+//                      setSpeedXPlayer("1X").then((value) {});
+//                    });
+//                  }
+//                  break;
+//                case 1:
+//                  {
+//                    setState(() {
+//                      currentSpeed = "0.5x";
+//                      setSpeedXPlayer("0.5x").then((value) {});
+//                    });
+//                  }
+//                  break;
+//                case 2:
+//                  {
+//                    setState(() {
+//                      currentSpeed = "0.75x";
+//                      setSpeedXPlayer("0.75x").then((value) {});
+//                    });
+//                  }
+//                  break;
+//                case 3:
+//                  {
+//                    setState(() {
+//                      currentSpeed = "2x";
+//                      setSpeedXPlayer("2x").then((value) {});
+//                    });
+//                  }
+//                  break;
+//              }
+//
+//              if (speedIndex == 0) {
+//                currentSpeed = "1x";
+//                setSpeedXPlayer("1x").then((value) {});
+//              }
+//            },
+//            child: Container(
+//              width: 50.0,
+//              height: 50.0,
+//              alignment: Alignment.center,
+//              decoration: BoxDecoration(
+//                shape: BoxShape.circle,
+//                color: Colors.blue.withOpacity(0.5),
+//              ),
+//              child: Text(
+//                currentSpeed,
+//                style: TextStyle(
+//                    color: Colors.white,
+//                    fontSize: 15.0,
+//                    fontFamily: "BoldFont"),
+//              ),
+//              padding: EdgeInsets.fromLTRB(5.0, 5.0, 5.0, 5.0),
+//            ),
+//          )
         ],
       ),
-    ));
+    ),
+
+    );
   }
 
+  share(BuildContext context) {
+    final RenderBox box = context.findRenderObject();
+
+    Share.share("https://play.google.com/store/apps/details?id=com.TAPHN.LATUANI",
+        subject: "La Tuani",
+        sharePositionOrigin: box.localToGlobal(Offset.zero) & box.size);
+  }
   Widget _buildDuration() {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 25.0),
@@ -548,7 +572,7 @@ class _AudioPlayerScreenState extends State<AudioPlayerScreen> {
     if (isPlayingAudio) {
       pausePlayer().then((value) {});
     } else {
-      playPlayer(url, "by TAPHN", "Magic Radio").then((value) {});
+      playPlayer(url, "by TAPHN", "La Tuani 100.3 FM").then((value) {});
     }
   }
 
