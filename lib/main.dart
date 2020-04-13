@@ -44,7 +44,7 @@ class _MyAppState extends State<MyApp> {
 
   @override
   void initState() {
-    FirebaseAdMob.instance.initialize(appId: appId);
+  //  FirebaseAdMob.instance.initialize(appId: appId);
     super.initState();
   }
 

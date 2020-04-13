@@ -20,7 +20,7 @@ class _AudioPlayerScreenState extends State<AudioPlayerScreen> {
   String greetings;
   bool isPlayingAudio = false;
   int difference;
-  String url = "http://latuani.globalradios.stream";
+  String url = "http://emisorasunidas.globalradios.stream";
   Timer playStateTimer;
   Timer seekBarTimer;
   double progress = 0.0;
@@ -87,10 +87,26 @@ class _AudioPlayerScreenState extends State<AudioPlayerScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: Drawer(
+        child: ListView(
+          children: <Widget>[
+            DrawerHeader(
+              child: Text("Emisoras Unidas", style: TextStyle(fontSize: 24)),
+              decoration: BoxDecoration(
+                color: Colors.yellow
+              )
+            ),
+            ListTile(
+              title: Text("Exit"),
+              trailing: Icon(Icons.exit_to_app),
+              onTap: ()=>{exit(0)},
+            )
+          ]
+        ),
+      ),
         appBar: AppBar(
           actions: <Widget>[IconButton(
             icon: const Icon(Icons.share),
-
             tooltip: "Share",
             onPressed: (){
               share(
@@ -99,7 +115,7 @@ class _AudioPlayerScreenState extends State<AudioPlayerScreen> {
             },
           )],
 
-          backgroundColor: Colors.deepOrangeAccent,
+          backgroundColor: Colors.black,
         ),
         body: SingleChildScrollView(
       child: Column(
@@ -113,8 +129,8 @@ class _AudioPlayerScreenState extends State<AudioPlayerScreen> {
                   child: WaveWidget(
                     config: CustomConfig(
                       gradients: [
-                        [Colors.blueAccent, Colors.blue.shade400],
-                        [Colors.indigoAccent, Colors.blueAccent.shade100],
+                        [Colors.yellow, Colors.yellow.shade400],
+                        [Colors.amberAccent, Colors.amberAccent.shade100],
                       ],
                       durations: [19440, 10800],
                       heightPercentages: [0.10, 0.20],
@@ -144,12 +160,12 @@ class _AudioPlayerScreenState extends State<AudioPlayerScreen> {
                     decoration: BoxDecoration(
                         boxShadow: [
                           BoxShadow(
-                            color: Colors.blue.withOpacity(0.3),
+                            color: Colors.yellow.withOpacity(0.3),
                             blurRadius: 15,
                             spreadRadius: 15,
                           )
                         ],
-                        border: Border.all(color: Colors.lightBlue, width: 2.5),
+                        border: Border.all(color: Colors.black, width: 2.5),
                         shape: BoxShape.circle,
                         image: DecorationImage(
                           fit: BoxFit.fill,
@@ -164,7 +180,7 @@ class _AudioPlayerScreenState extends State<AudioPlayerScreen> {
             margin: EdgeInsets.only(top: 20.0),
             alignment: Alignment.center,
             child: Text(
-              "La Tuani 100.3 FM",
+              "Emisoras Unidas 89.7 FM",
               style: TextStyle(
                   fontFamily: "Regular",
                   color: Colors.blueGrey,
@@ -282,8 +298,8 @@ class _AudioPlayerScreenState extends State<AudioPlayerScreen> {
   share(BuildContext context) {
     final RenderBox box = context.findRenderObject();
 
-    Share.share("https://play.google.com/store/apps/details?id=com.TAPHN.LATUANI",
-        subject: "La Tuani",
+    Share.share("",
+        subject: "Emisoras Unidas",
         sharePositionOrigin: box.localToGlobal(Offset.zero) & box.size);
   }
   Widget _buildDuration() {
@@ -364,7 +380,7 @@ class _AudioPlayerScreenState extends State<AudioPlayerScreen> {
                         child: Container(
                           child: SpinKitDualRing(
                             lineWidth: 1.0,
-                            color: Colors.blue,
+                            color: Colors.yellow,
                             size: 50.0,
                           ),
                         ),
@@ -572,7 +588,7 @@ class _AudioPlayerScreenState extends State<AudioPlayerScreen> {
     if (isPlayingAudio) {
       pausePlayer().then((value) {});
     } else {
-      playPlayer(url, "by TAPHN", "La Tuani 100.3 FM").then((value) {});
+      playPlayer(url, "by TAPHN", "Emisoras Unidas 89.7 FM").then((value) {});
     }
   }
 
