@@ -298,7 +298,7 @@ class _AudioPlayerScreenState extends State<AudioPlayerScreen> {
   share(BuildContext context) {
     final RenderBox box = context.findRenderObject();
 
-    Share.share("",
+    Share.share("https://play.google.com/store/apps/details?id=com.taphn.emisorasunidas",
         subject: "Emisoras Unidas",
         sharePositionOrigin: box.localToGlobal(Offset.zero) & box.size);
   }

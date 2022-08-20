@@ -5,8 +5,8 @@ import 'package:firebase_admob/firebase_admob.dart';
 
 //const String testDevice = 'Mobile_id';
 
-const appId = 'ca-app-pub-1170851332113980~5173078047';
-const bannerId = 'ca-app-pub-1170851332113980/7172328356';
+const appId = 'ca-app-pub-1170851332113980~9259123054';
+const bannerId = 'ca-app-pub-1170851332113980/1815747302';
 //const insterstitialId = 'ca-app-pub-XXXXXXXXX/XXXXXXXX';
 
 MobileAdTargetingInfo targetingInfo = MobileAdTargetingInfo(
